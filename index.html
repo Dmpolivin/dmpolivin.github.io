@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dmitriy Polivin — Portfolio</title>
+<meta name="description" content="Dmitriy Polivin — film editor and AI creator. Selected works and my own plugins for DaVinci Resolve.">
+<meta name="theme-color" content="#111314">
+<link rel="canonical" href="https://dmpolivin.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dmpolivin.github.io/">
+<meta property="og:title" content="Dmitriy Polivin — Portfolio">
+<meta property="og:description" content="Film editor and AI creator. Selected works and my own plugins for DaVinci Resolve.">
+<meta property="og:image" content="https://dmpolivin.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111314'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='800' font-size='26' fill='%23ecebe7' text-anchor='middle'%3EDP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800&family=Geist:wght@300;400&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #111314; --text: #ecebe7; --soft: #b9b8b3; --muted: #6f6f6f; --line: #262626;
+    --display: "Archivo", sans-serif; --body: "Geist", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; -webkit-font-smoothing: antialiased; }
+  a, button { color: inherit; font: inherit; text-decoration: none; }
+  button { background: none; border: 0; cursor: pointer; text-align: left; }
+  :focus-visible { outline: 1px solid var(--text); outline-offset: 4px; }
+  .caps { font-family: var(--display); font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; text-transform: uppercase; }
+  .mono { font: 400 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #8a8a8a; }
+
+  /* ---------- Первый экран ---------- */
+  .hero { min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; }
+  .text { display: flex; flex-direction: column; justify-content: space-between; gap: 48px; padding: 32px 48px 40px; min-width: 0; }
+  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .top nav { display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-end; }
+  .top a:hover, .cue:hover, footer a:hover { color: var(--text); }
+
+  h1 { line-height: .82; white-space: nowrap; }
+  h1 span { display: inline-block; }
+  .name { font-size: clamp(22px, 2.5vw, 38px); line-height: 1; margin-top: 18px; }
+  .lead { font-size: 17px; line-height: 1.55; color: var(--soft); max-width: 500px; margin-top: 22px; text-wrap: pretty; }
+  .cue { display: inline-block; margin-top: 36px; }
+
+  .photo { position: relative; overflow: hidden; background: #141617; }
+  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; display: block; }
+  .photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, var(--bg) 0%, rgba(17, 19, 20, 0) 22%); }
+
+  /* ---------- Сетка работ ---------- */
+  .works { padding: 96px 48px 48px; border-top: 1px solid var(--line); }
+  .works header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 40px; }
+  .works h2 { font-size: clamp(32px, 4.4vw, 64px); line-height: .9; }
+  .group + .group { margin-top: 64px; }
+  .group h3 { margin-bottom: 16px; }
+  .grid { list-style: none; display: grid; gap: 16px; }
+  .grid.h { grid-template-columns: repeat(3, 1fr); }
+  /* Плитка-ссылка в конце сетки: закрывает последний ряд */
+  .more { height: 100%; min-height: 120px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; border: 1px solid var(--line); transition: border-color .2s; }
+  .more .caps { font-size: clamp(20px, 2vw, 30px); line-height: 1; white-space: nowrap; }
+  .grid.v .more .caps { font-size: clamp(15px, 1.35vw, 22px); }
+  .more:hover { border-color: var(--text); }
+  .more:hover .mono { color: var(--text); }
+  .grid.v { grid-template-columns: repeat(6, 1fr); }
+  .card { width: 100%; display: block; }
+  .thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: linear-gradient(135deg, #1d2021, #121415); }
+  .grid.v .thumb { aspect-ratio: 9 / 16; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+  .thumb.scope { background: #000; }
+  .thumb.scope img { object-fit: contain; }
+  .thumb .play { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgba(236, 235, 231, .5); display: grid; place-items: center; font-size: 14px; padding-left: 3px; background: rgba(17, 19, 20, .35); backdrop-filter: blur(4px); transition: background .2s, border-color .2s; }
+  .card:hover .thumb img { transform: scale(1.03); }
+  .card:hover .play { background: rgba(236, 235, 231, .15); border-color: var(--text); }
+
+  footer { display: flex; justify-content: space-between; gap: 16px; padding: 48px; }
+
+  /* ---------- Плеер поверх страницы ---------- */
+  dialog { margin: auto; padding: 0; border: 0; background: transparent; color: var(--text); max-width: none; max-height: none; overflow: visible; }
+  dialog::backdrop { background: rgba(8, 9, 10, .97); }
+  .bar { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 12px; }
+  .bar button:hover { color: var(--text); }
+  .frame { background: #000; width: min(92vw, 1280px); aspect-ratio: 16 / 9; }
+  .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .soon { height: 100%; display: grid; place-items: center; }
+
+  @media (max-width: 1100px) { .grid.h { grid-template-columns: repeat(2, 1fr); } .grid.v { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; }
+    .photo { order: -1; aspect-ratio: 1142 / 1399; max-height: 72svh; }
+    .photo::after { background: linear-gradient(0deg, var(--bg) 0%, rgba(17, 19, 20, 0) 25%); }
+    .text { padding: 20px 16px 32px; gap: 32px; }
+    .top { flex-direction: column; gap: 10px; }
+    .top nav { justify-content: flex-start; gap: 8px 18px; }
+    .works { padding: 64px 16px 32px; }
+    .grid.h { grid-template-columns: 1fr; }
+    .grid.v { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .group + .group { margin-top: 48px; }
+    footer { padding: 32px 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .thumb img { transition: none; } }
+
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="text">
+      <header class="top mono">
+        <span>DP</span>
+        <nav>
+          <a href="https://www.instagram.com/dmpolivin/" target="_blank" rel="noopener">Instagram ↗</a>
+          <a href="https://www.tiktok.com/@dmitriypolivin" target="_blank" rel="noopener">TikTok ↗</a>
+          <a href="https://t.me/dmpolivin" target="_blank" rel="noopener">Telegram ↗</a>
+        </nav>
+      </header>
+      <div class="intro">
+        <h1 class="caps"><span>Portfolio</span></h1>
+        <p class="name caps">Dmitriy Polivin</p>
+        <p class="lead">Film editor and AI creator. I cut, direct with generative video and build my own plugins for DaVinci Resolve — Tracery and EditorsGang Tools (camera shake, light, grain).</p>
+        <a class="cue mono" href="#works">Works ↓</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="portrait.webp" width="1142" height="1399" alt="Dmitriy Polivin" fetchpriority="high">
+    </figure>
+  </section>
+
+  <section class="works" id="works">
+    <header>
+      <h2 class="caps">Selected works</h2>
+      <span class="mono" id="count"></span>
+    </header>
+    <div class="group"><h3 class="mono">16:9</h3><ul class="grid h" id="grid-h"></ul></div>
+    <div class="group"><h3 class="mono">9:16</h3><ul class="grid v" id="grid-v"></ul></div>
+  </section>
+</main>
+
+<footer class="mono">
+  <span>© 2026 Dmitriy Polivin</span>
+  <a href="https://t.me/dmpolivin" target="_blank" rel="noopener">Telegram ↗</a>
+</footer>
+
+<dialog id="player" aria-label="Video player">
+  <div class="bar mono"><span class="caption"></span><button type="button" class="close">Close ✕</button></div>
+  <div class="frame"></div>
+</dialog>
+
+<script>
+  // PORTFOLIO растягивается ровно на ширину левой колонки
+  const h1 = document.querySelector('.hero h1');
+  const word = h1.querySelector('span');
+  function fitTitle() {
+    word.style.fontSize = '100px';
+    const size = 100 * h1.parentElement.clientWidth / word.offsetWidth;
+    word.style.fontSize = Math.min(size, 280) + 'px';
+  }
+  document.fonts.ready.then(fitTitle);
+  document.fonts.addEventListener('loadingdone', fitTitle);
+  addEventListener('resize', fitTitle);
+  fitTitle();
+
+  // Ссылка YouTube / Vimeo / Google Диск → плеер и обложка
+  function parse(link) {
+    const yt = link.match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([\w-]{11})/);
+    if (yt) return { src: `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0&playsinline=1`, thumb: `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg` };
+    const vm = link.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (vm) return { src: `https://player.vimeo.com/video/${vm[1]}?autoplay=1&dnt=1`, thumb: null };
+    // Диск: файл должен быть открыт «всем, у кого есть ссылка»
+    const gd = link.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?.*id=)([\w-]{20,})/);
+    if (gd) return { src: `https://drive.google.com/file/d/${gd[1]}/preview`, thumb: `https://drive.google.com/thumbnail?id=${gd[1]}&sz=w1280` };
+    return null;
+  }
+
+  // Работы. Порядок здесь = порядок на сайте. Ссылка — YouTube, Vimeo или Google Диск (доступ «всем, у кого есть ссылка»).
+  // scope: true — широкий кадр 2.39:1, обложка показывается без обрезки. thumb — своя обложка из папки covers/.
+  // Имена файлов — только для тебя, на сайте их нет.
+  const WORKS = {
+    horizontal: [
+      { v: 'https://drive.google.com/file/d/1oDuC9mVfuqI4ZsZq3ibZxXx6VhJ97B1g/view' }, // PRACTICE_2
+      { v: 'https://drive.google.com/file/d/12l9cmjrjeIMScg_5q2qNFlrfnWyi6TC3/view', scope: true }, // Fashion_AI_final
+      { v: 'https://drive.google.com/file/d/1J1HWT398F6_JqtMh4CA-cqXsdIVq-Z69/view' }, // FASHION_rev
+      { v: 'https://drive.google.com/file/d/1SnljquyA9kjDa9YbujyuIOn7Mi8Vnyhk/view' }, // Practice_4_final
+      { v: 'https://drive.google.com/file/d/1hxZtESp3gw9Jh9J6SFdhsRS57ivMFsyk/view' }, // Final
+      { v: 'https://drive.google.com/file/d/1ENfxBTmXsyATL6j8xYu1xYqm4g4plMiv/view' }, // TVCH_fin
+      { v: 'https://drive.google.com/file/d/1oorjPC4K3TMEMMm7f0DX2cWfgetWwgkF/view' }, // Omoda_ver_2_v02
+      { v: 'https://drive.google.com/file/d/1ZcoQeKufPtmWAQLiyU7X3e5nIcLEM_fu/view', thumb: 'covers/mbattle.webp' }, // MBattle_v01
+      { v: 'https://drive.google.com/file/d/10kkw4BTJJF8EStIK2UC8ubdIY_Bs-5qQ/view' }, // Checka_combate_v02
+      { v: 'https://drive.google.com/file/d/1lLBnlwRqdJnYn8YXp3zQWI5lXZ0C4eKP/view' }, // Geg2
+      { v: 'https://drive.google.com/file/d/1z4ce3IMRWllzaDFP6mNT9Nd6JfSPHxqR/view' }, // Yankon_v01
+      { v: 'https://drive.google.com/file/d/13j3N_pu5539WDhwOOqQjsv-C9IfXWWVH/view' }, // YGG_t-short_v03
+    ],
+    vertical: [
+      { v: 'https://drive.google.com/file/d/1KZ-vAeq73sl1m2b_AE48P9w5wC6Rsqr0/view' }, // Fashion_AZ_me
+      { v: 'https://drive.google.com/file/d/1t0OREZfJQMKqLCA6NRxuZjhsPXxqO0e2/view' }, // ART_TVCH_my
+      { v: 'https://drive.google.com/file/d/1MY5qCHOSSQnsiuMLpu623P_3hIPWVIXZ/view' }, // color_Sarabloom_all
+      { v: 'https://drive.google.com/file/d/1nUpPKSQH4WtjkPY2nVUfp4z4tHu_m8H5/view', thumb: 'covers/myvers.webp' }, // MY_vers
+      { v: 'https://drive.google.com/file/d/1ZwZI_A4X_s02TIObGivn3IRsngHCQMCk/view' }, // INVIDEO_MCP_clip
+    ],
+  };
+
+  const dlg = document.getElementById('player');
+  const frame = dlg.querySelector('.frame');
+  const caption = dlg.querySelector('.caption');
+  const num = i => String(i).padStart(2, '0');
+
+  function openPlayer(v, ratio, i) {
+    const [w, h] = ratio.split('/').map(Number);
+    frame.style.aspectRatio = `${w} / ${h}`;
+    frame.style.width = `min(92vw, 1280px, calc(82svh * ${w / h}))`;
+    frame.innerHTML = '';
+    if (v) {
+      const iframe = document.createElement('iframe');
+      iframe.src = v.src;
+      iframe.title = `Work ${num(i)}`;
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      iframe.allowFullscreen = true;
+      frame.append(iframe);
+    } else {
+      frame.innerHTML = '<div class="soon mono">Video coming soon</div>';
+    }
+    caption.textContent = num(i);
+    dlg.showModal();
+  }
+
+  let total = 0;
+  function addCard(list, work, ratio) {
+    const i = ++total;
+    const v = parse(work.v || '');
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'card';
+    btn.setAttribute('aria-haspopup', 'dialog');
+    btn.setAttribute('aria-label', `Play work ${num(i)}`);
+    const thumb = document.createElement('div');
+    thumb.className = 'thumb' + (work.scope ? ' scope' : '');
+    // Своя обложка (thumb) важнее автоматической: Диск берёт первый кадр, а он бывает чёрным
+    const thumbUrl = work.thumb || (v && v.thumb && v.thumb.replace(/sz=w\d+/, ratio === '9/16' ? 'sz=w640' : 'sz=w960'));
+    if (thumbUrl) {
+      const img = new Image();
+      img.src = thumbUrl;
+      img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
+      img.onerror = () => img.remove();
+      thumb.append(img);
+    }
+    thumb.insertAdjacentHTML('beforeend', '<span class="play" aria-hidden="true">▶</span>');
+    btn.append(thumb);
+    btn.addEventListener('click', () => openPlayer(v, ratio, i));
+    const li = document.createElement('li');
+    li.append(btn);
+    list.append(li);
+  }
+
+  WORKS.horizontal.forEach(w => addCard(document.getElementById('grid-h'), w, '16/9'));
+  WORKS.vertical.forEach(w => addCard(document.getElementById('grid-v'), w, '9/16'));
+  // Плитка-ссылка добавляется, только если без неё последний ряд остался бы неполным.
+  // Колонки: 3 / 2 / 1 у горизонтальных и 6 / 3 / 2 у вертикальных — всем подходит кратность 6.
+  function addMore(id, count, href, label) {
+    if (count % 6 !== 5) return;
+    document.getElementById(id).insertAdjacentHTML('beforeend',
+      `<li><a class="more" href="${href}" target="_blank" rel="noopener"><span class="mono">More work</span><span class="caps">${label} ↗</span></a></li>`);
+  }
+  addMore('grid-h', WORKS.horizontal.length, 'https://www.instagram.com/dmpolivin/', 'Instagram');
+  addMore('grid-v', WORKS.vertical.length, 'https://www.tiktok.com/@dmitriypolivin', 'TikTok');
+  document.querySelectorAll('.group').forEach(g => { if (!g.querySelector('li')) g.remove(); });
+  document.getElementById('count').textContent = num(total);
+
+  dlg.querySelector('.close').addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('close', () => { frame.innerHTML = ''; });
+
+</script>
+</body>
+</html>
